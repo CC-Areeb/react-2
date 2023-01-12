@@ -68,3 +68,99 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+# Class based components
+
+React also has class based approach for its components as shown below in an example:
+
+```
+export default class App extends Component {
+  feeling = "😎";
+
+  render() {
+    return (
+      <>
+        <Navbar />
+        <News />
+      </>
+    )
+  }
+}
+```
+
+### Props
+
+The way we define props is a bit different when using class based components
+
+```
+let { title, description, imgUrl } = this.props;
+return (
+    <>
+        <div className="card" style={{ width: "26rem" }}>
+            <img src={imgUrl} className="card-img-top" alt="..." />
+            <div className="card-body">
+                <h5 className="card-title">{title}</h5>
+                <p className="card-text">{description}</p>
+                <div className="text-center">
+                    <a href="/newsdetail" className="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </>
+)
+```
+
+| Keyword  | Detail |
+| ------------- | ------------- |
+|this|the 'this' keyword us required when you want to use a variable or method in the same class|
+|{name_of_prop}|this is a way to get values as a prop and this is mostly used to pass static data|  
+
+
+```
+<NewsItem title="This is the title" description="This is a description" />
+```
+we can set prop values like we use attributes in basic HTML such as `class`, `id` and more.
+
+### Constructors
+
+We can use Constructors like we use in normal object oriented programming as shown below
+
+```
+constructor () {
+    super()
+}
+```
+
+- the constructor needs to have the `super()` keyword first before we can use it.
+- constructor will run when the object of this class is called
+
+```
+articles = [
+    {
+        "source": {
+            "id": "bloomberg",
+            "name": "Bloomberg"
+        },
+        "author": null,
+        "title": "Stock Market Today: Dow, S&P Live Updates for Jan. 11 - Bloomberg",
+        "description": null,
+        "url": "https://www.bloomberg.com/tosv2.html?vid=&uuid=d0e74053-918d-11ed-8ba4-734a66645756&url=L25ld3MvYXJ0aWNsZXMvMjAyMy0wMS0xMC9hc2lhbi1zdG9ja3Mtc2V0LXRvLXJpc2UtYW1pZC1pbmZsYXRpb24tb3B0aW1pc20tbWFya2V0cy13cmFw",
+        "urlToImage": null,
+        "publishedAt": "2023-01-11T06:46:00Z",
+        "content": "To continue, please click the box below to let us know you're not a robot."
+    },
+];
+constructor () {
+    super();
+    this.state = {
+        articles: this.articles,
+        loading: false,
+    }
+}
+```
+
+we can add more properties inside the constructors
