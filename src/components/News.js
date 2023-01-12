@@ -10,7 +10,7 @@ export class News extends Component {
             },
             "author": null,
             "title": "Stock Market Today: Dow, S&P Live Updates for Jan. 11 - Bloomberg",
-            "description": null,
+            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia quae assumenda atque nisi necessitatibus harum? Ut, totam quo! Rerum repellendus cumque earum, recusandae dolorum praesentium. Temporibus, recusandae sint ipsum qui quos perferendis commodi suscipit pariatur officia repudiandae quibusdam, magni ad!",
             "url": "https://www.bloomberg.com/tosv2.html?vid=&uuid=d0e74053-918d-11ed-8ba4-734a66645756&url=L25ld3MvYXJ0aWNsZXMvMjAyMy0wMS0xMC9hc2lhbi1zdG9ja3Mtc2V0LXRvLXJpc2UtYW1pZC1pbmZsYXRpb24tb3B0aW1pc20tbWFya2V0cy13cmFw",
             "urlToImage": null,
             "publishedAt": "2023-01-11T06:46:00Z",
@@ -62,7 +62,7 @@ export class News extends Component {
             },
             "author": null,
             "title": "Here are Tuesday’s winning Mega Millions numbers for the $1.1B jackpot - The Hill",
-            "description": null,
+            "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, eos. Soluta aspernatur laudantium eveniet ullam officiis fuga, harum exercitationem quisquam, autem dolor voluptatibus labore ipsam deserunt. Qui obcaecati, magnam cum natus in assumenda nulla officia quibusdam necessitatibus, sapiente inventore dolor!",
             "url": "https://news.google.com/__i/rss/rd/articles/CBMifWh0dHBzOi8vdGhlaGlsbC5jb20vaG9tZW5ld3MvbmV4c3Rhcl9tZWRpYV93aXJlLzM4MDc5OTktaGVyZS1hcmUtdHVlc2RheXMtd2lubmluZy1tZWdhLW1pbGxpb25zLW51bWJlcnMtZm9yLXRoZS0xLTFiLWphY2twb3Qv0gGBAWh0dHBzOi8vdGhlaGlsbC5jb20vaG9tZW5ld3MvbmV4c3Rhcl9tZWRpYV93aXJlLzM4MDc5OTktaGVyZS1hcmUtdHVlc2RheXMtd2lubmluZy1tZWdhLW1pbGxpb25zLW51bWJlcnMtZm9yLXRoZS0xLTFiLWphY2twb3QvYW1wLw?oc=5",
             "urlToImage": null,
             "publishedAt": "2023-01-11T04:02:00Z",
@@ -218,7 +218,7 @@ export class News extends Component {
             },
             "author": null,
             "title": "Apple to Begin Making In-House Screens in 2024 in Shift Away From Samsung - Bloomberg",
-            "description": null,
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam et ipsa fuga animi? Laboriosam magnam qui a doloremque placeat dolore quo sint possimus? Quisquam dignissimos perferendis voluptas eveniet atque soluta eum reprehenderit! Repudiandae possimus quae quibusdam vero quia ipsa corporis.",
             "url": "https://www.bloomberg.com/tosv2.html?vid=&uuid=18e1f939-917d-11ed-871b-427a65584b59&url=L25ld3MvYXJ0aWNsZXMvMjAyMy0wMS0xMS9hcHBsZS10by1iZWdpbi1tYWtpbmctaW4taG91c2Utc2NyZWVucy1pbi0yMDI0LWluLXNoaWZ0LWF3YXktZnJvbS1zYW1zdW5n",
             "urlToImage": null,
             "publishedAt": "2023-01-11T00:33:00Z",
@@ -278,32 +278,16 @@ export class News extends Component {
             <>
                 <div className="container mt-4">
                     <div className="row">
-                        <div className="col-4">
-                            <NewsItem
-                                title="This is the title"
-                                description="This is a description"
-                                imgUrl="https://ichef.bbci.co.uk/news/1024/branded_news/1E7F/production/_128270870_gettyimages-1245977780.jpg"
-                                newsUrl="TODO"
-                            />
-                        </div>
-
-                        <div className="col-4">
-                            <NewsItem
-                                title="This is the title"
-                                description="This is a description"
-                                imgUrl="https://ichef.bbci.co.uk/news/1024/branded_news/17F9F/production/_128270289_gettyimages-1432230036.jpg"
-                                newsUrl="TODO"
-                            />
-                        </div>
-
-                        <div className="col-4">
-                            <NewsItem
-                                title="This is the title"
-                                description="This is a description"
-                                imgUrl= "https://media.cnn.com/api/v1/images/stellar/prod/230111114001-09-california-weather-0110.jpg?c=16x9&q=w_800,c_fill"
-                                newsUrl="TODO"
-                            />
-                        </div>
+                        {this.state.articles.map((element) => {
+                            return <div key={element.url} className="custom-grid">
+                                <NewsItem
+                                    title={element.title}
+                                    description={element.description}
+                                    imgUrl={element.urlToImage}
+                                    newsUrl={element.url}
+                                />
+                            </div>
+                        })}
                     </div>
                 </div>
             </>
