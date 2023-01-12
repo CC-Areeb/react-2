@@ -279,10 +279,10 @@ export class News extends Component {
                 <div className="container mt-4">
                     <div className="row">
                         {this.state.articles.map((element) => {
-                            return <div key={element.url} className="custom-grid">
+                            return <div key={element.url} className="col">
                                 <NewsItem
-                                    title={element.title}
-                                    description={element.description}
+                                    title={element.title.slice(0, 30)}
+                                    description={element.description.slice(0, 90)}
                                     imgUrl={element.urlToImage}
                                     newsUrl={element.url}
                                 />
