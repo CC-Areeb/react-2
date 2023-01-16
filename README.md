@@ -225,7 +225,7 @@ async componentDidMount()
 
 the `let parse = await data.json();` is used to convert the data into json format as API data is usually represented in JSON format.
 
-Since now we are not using static data so we can set the articles as an empty array at the start and use the `componentDidMount` to fetcht the results by usng the API and to set our data
+Since now we are not using static data so we can set the articles as an empty array at the start and use the `componentDidMount` to fetch the results by usng the API and to set our data
 ```
 constructor() {
     super();
