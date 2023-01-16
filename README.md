@@ -137,6 +137,7 @@ constructor () {
 
 - the constructor needs to have the `super()` keyword first before we can use it.
 - constructor will run when the object of this class is called
+- we can add more properties inside the constructors
 
 ```
 articles = [
@@ -163,4 +164,116 @@ constructor () {
 }
 ```
 
-we can add more properties inside the constructors
+### Mapping
+
+we can map over the large collection of data 
+
+```
+<div className="row">
+    {this.state.articles.map((element) => {
+        return <div className="col-4">
+            <NewsItem
+                key={element.url}
+                title="This is the title"
+                description="This is a description"
+                imgUrl="https://ichef.bbci.co.uk/news/1024/branded_news/1E7F/production/_128270870_gettyimages-1245977780.jpg"
+                newsUrl="TODO"
+            />
+        </div>
+    })}
+</div>
+```
+
+- the map needs to have a callback arrow function that always returns something like a value or an HTML template.
+- array maps also need a unique prop keys so we have passed a key attribute inside the component tag.
+
+### Mounting 
+
+We can use the `componentDidMount()` life cycle hook to re-render a component.
+
+### Async
+It allows us to write promises-based code as if it was synchronous and it checks that we are not breaking the execution thread.
+```
+async componentDidMount() {...}
+```
+
+
+### Await 
+This is used so that we JavaScript can wait for a promise response when the async function has fired.
+```
+let url = 'https://newsapi.org/v2/everything?q=apple&from=2023-01-11&to=2023-01-11&sortBy=popularity&apiKey=YOUR_API_KEY';
+let data = await fetch(url);
+```
+
+
+### Setter 
+We use the `setState()` method as the setter for our constructor to set values without mutating them
+
+##### Answer from google 
+`With setState() we can change the state without directly mutating it. This will lead to the re-rendering of the component due to the change of the state.`
+
+### complete snippet
+```
+async componentDidMount()
+{
+    let url = 'https://newsapi.org/v2/everything?q=apple&from=2023-01-11&to=2023-01-11&sortBy=popularity&apiKey=YOUR_API_KEY';
+    let data = await fetch(url);
+    let parse = await data.json();
+    this.setState({articles: parse.articles});
+}
+```
+
+the `let parse = await data.json();` is used to convert the data into json format as API data is usually represented in JSON format.
+
+Since now we are not using static data so we can set the articles as an empty array at the start and use the `componentDidMount` to fetcht the results by usng the API and to set our data
+```
+constructor() {
+    super();
+    this.state = {
+        articles: [],
+        loading: false,
+    }
+}
+
+async componentDidMount()
+{
+    let url = 'https://newsapi.org/v2/everything?q=apple&from=2023-01-11&to=2023-01-11&sortBy=popularity&apiKey=e29fdd2fa8144c15af2e1dca8435e6f5';
+    let data = await fetch(url);
+    let parse = await data.json();
+    this.setState({articles: parse.articles});
+}
+
+render() {
+    return (
+        <>
+            <div className="container mt-4">
+                <div style={this.customGrid}>
+                    {this.state.articles.map((element) => {
+                        return <div key={element.url}>
+                            <NewsItem
+                                title={element.title.slice(0, 30)}
+                                description={element.description.slice(0, 90)}
+                                imgUrl={element.urlToImage}
+                                newsUrl={element.url}
+                            />
+                        </div>
+                    })}
+                </div>
+            </div>
+        </>
+    )
+}
+
+```
+
+### Custom grid 
+We can also directly apply css by first defining a variabe like customGrid and then calling it inside the container tag by using the `this` keyword.
+```
+customGrid = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+    gap: "3rem",
+}
+
+<div style={this.customGrid}>
+```
