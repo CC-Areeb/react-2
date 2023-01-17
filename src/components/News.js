@@ -12,17 +12,42 @@ export class News extends Component {
         super();
         this.state = {
             articles: [],
-            loading: false,
+            loading: true,
+            page: 1,
         }
     }
 
-    async componentDidMount()
-    {
-        let url = 'https://newsapi.org/v2/everything?q=apple&from=2023-01-11&to=2023-01-11&sortBy=popularity&apiKey=e29fdd2fa8144c15af2e1dca8435e6f5';
+    async componentDidMount() {
+        let url = 'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=YOUR_API_KEY&pageSize=12';
         let data = await fetch(url);
         let parse = await data.json();
-        this.setState({articles: parse.articles});
+        this.setState({ articles: parse.articles, totalResults:parse.totalResults });
     }
+
+    handlePreviousPage = async () => {
+        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=YOUR_API_KEY&page=${this.state.page - 1}&pageSize=12`;
+        let data = await fetch(url);
+        let parse = await data.json();
+        this.setState({ articles: parse.articles });
+        this.setState({
+            page: this.state.page - 1,
+        });
+    }
+
+    handleNextPage = async () => {
+
+        if ( !(this.state.page + 1 > Math.ceil(this.state.totalResults/12)) ) {
+            let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=YOUR_API_KEY&page=${this.state.page + 1}&pageSize=12`;
+            let data = await fetch(url);
+            let parse = await data.json();
+            this.setState({ articles: parse.articles });
+            this.setState({
+                page: this.state.page + 1,
+            });
+        }
+    }
+
+
 
     render() {
         return (
@@ -40,6 +65,10 @@ export class News extends Component {
                             </div>
                         })}
                     </div>
+                </div>
+                <div className="d-flex justify-content-evenly my-4">
+                    <button disabled={this.state.page<=1} type="button" className="btn btn-dark" onClick={this.handlePreviousPage}><i className="bi bi-arrow-left"></i> Previous</button>
+                    <button type="button" className="btn btn-dark" onClick={this.handleNextPage}>Next <i className="bi bi-arrow-right"></i></button>
                 </div>
             </>
         )
