@@ -18,14 +18,14 @@ export class News extends Component {
     }
 
     async componentDidMount() {
-        let url = 'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=e29fdd2fa8144c15af2e1dca8435e6f5&pageSize=12';
+        let url = 'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=YOUR_API_KEY&pageSize=12';
         let data = await fetch(url);
         let parse = await data.json();
         this.setState({ articles: parse.articles, totalResults:parse.totalResults });
     }
 
     handlePreviousPage = async () => {
-        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=e29fdd2fa8144c15af2e1dca8435e6f5&page=${this.state.page - 1}&pageSize=12`;
+        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=YOUR_API_KEY&page=${this.state.page - 1}&pageSize=12`;
         let data = await fetch(url);
         let parse = await data.json();
         this.setState({ articles: parse.articles });
@@ -37,7 +37,7 @@ export class News extends Component {
     handleNextPage = async () => {
 
         if ( !(this.state.page + 1 > Math.ceil(this.state.totalResults/12)) ) {
-            let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=e29fdd2fa8144c15af2e1dca8435e6f5&page=${this.state.page + 1}&pageSize=12`;
+            let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=YOUR_API_KEY&page=${this.state.page + 1}&pageSize=12`;
             let data = await fetch(url);
             let parse = await data.json();
             this.setState({ articles: parse.articles });
